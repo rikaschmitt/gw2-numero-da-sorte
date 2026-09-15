@@ -73,13 +73,19 @@ app.get("/api/evento-ativo", async (req, res) => {
         .from("eventos")
         .select("id, nome, status")
         .eq("status", "ativo")
-        .single();
+        .maybeSingle();
 
     if (error) {
         console.error("Erro ao buscar evento ativo:", error);
 
         return res.status(500).json({
             error: error.message
+        });
+    }
+
+    if (!data) {
+        return res.status(404).json({
+            error: "Nenhum evento ativo no momento."
         });
     }
 
@@ -111,12 +117,46 @@ app.post("/api/eventos", async (req, res) => {
     if (error) {
         console.error("Erro ao criar evento:", error);
 
+        if (error.code === "23505") {
+            return res.status(409).json({
+                error: "Já existe um evento ativo. Encerre o evento atual antes de criar um novo."
+            });
+        }
+
         return res.status(500).json({
             error: error.message
         });
     }
 
     res.status(201).json(data);
+});
+
+app.post("/api/eventos/:eventoId/encerrar", async (req, res) => {
+    const { eventoId } = req.params;
+
+    const { data, error } = await supabase
+        .from("eventos")
+        .update({ status: "encerrado" })
+        .eq("id", eventoId)
+        .eq("status", "ativo")
+        .select("id, nome, status")
+        .single();
+
+    if (error) {
+        console.error("Erro ao encerrar evento:", error);
+
+        if (error.code === "PGRST116") {
+            return res.status(404).json({
+                error: "Evento ativo não encontrado."
+            });
+        }
+
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+
+    res.json(data);
 });
 
 // ===============================
