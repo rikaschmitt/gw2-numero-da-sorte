@@ -261,6 +261,41 @@ app.get("/api/eventos/:eventoId/numeros", async (req, res) => {
   });
 });
 
+
+app.post("/api/eventos/:eventoId/sortear", async (req, res) => {
+    const { eventoId } = req.params;
+
+    const { data, error } = await supabase.rpc(
+        "sortear_numero",
+        {
+            p_evento_id: eventoId
+        }
+    );
+
+    if (error) {
+        console.error("Erro ao realizar sorteio:", error);
+
+        return res.status(400).json({
+            error: error.message
+        });
+    }
+
+    if (!data || data.length === 0) {
+        return res.status(404).json({
+            error: "Não foi possível realizar o sorteio."
+        });
+    }
+
+    const resultado = data[0];
+
+    res.json({
+        sucesso: true,
+        numero: resultado.numero_sorteado,
+        participante_id: resultado.participante_id,
+        participante_nome: resultado.participante_nome
+    });
+});
+
 // ===============================
 // INICIAR SERVIDOR
 // ===============================
