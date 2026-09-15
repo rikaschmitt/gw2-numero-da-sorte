@@ -238,6 +238,29 @@ app.get("/api/eventos/:eventoId/consultar/:codigo", async (req, res) => {
   });
 });
 
+app.get("/api/eventos/:eventoId/numeros", async (req, res) => {
+  const { eventoId } = req.params;
+
+  const { data, error } = await supabase.rpc(
+    "listar_numeros_evento",
+    {
+      p_evento_id: eventoId
+    }
+  );
+
+  if (error) {
+    console.error("Erro ao listar números:", error);
+    return res.status(500).json({
+      error: error.message
+    });
+  }
+
+  res.json({
+    quantidade: data.length,
+    numeros: data.map(item => item.numero)
+  });
+});
+
 // ===============================
 // INICIAR SERVIDOR
 // ===============================
