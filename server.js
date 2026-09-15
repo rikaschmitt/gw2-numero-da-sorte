@@ -9,7 +9,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// Teste do servidor
+// ===============================
+// TESTE DO SERVIDOR
+// ===============================
+
 app.get("/api/health", (req, res) => {
     res.json({
         status: "ok",
@@ -17,7 +20,10 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-// Teste da conexão com o Supabase
+// ===============================
+// LISTAR EVENTOS
+// ===============================
+
 app.get("/api/eventos", async (req, res) => {
     const { data, error } = await supabase
         .from("eventos")
@@ -25,7 +31,7 @@ app.get("/api/eventos", async (req, res) => {
         .order("nome");
 
     if (error) {
-        console.error("Erro Supabase:", error);
+        console.error("Erro ao listar eventos:", error);
 
         return res.status(500).json({
             error: error.message
@@ -34,6 +40,43 @@ app.get("/api/eventos", async (req, res) => {
 
     res.json(data);
 });
+
+// ===============================
+// CRIAR EVENTO
+// ===============================
+
+app.post("/api/eventos", async (req, res) => {
+    const { nome } = req.body;
+
+    if (!nome || !nome.trim()) {
+        return res.status(400).json({
+            error: "O nome do evento é obrigatório."
+        });
+    }
+
+    const { data, error } = await supabase
+        .from("eventos")
+        .insert({
+            nome: nome.trim(),
+            status: "ativo"
+        })
+        .select("id, nome, status")
+        .single();
+
+    if (error) {
+        console.error("Erro ao criar evento:", error);
+
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+
+    res.status(201).json(data);
+});
+
+// ===============================
+// INICIAR SERVIDOR
+// ===============================
 
 app.listen(PORT, () => {
     console.log(`Servidor iniciado na porta ${PORT}`);
