@@ -768,74 +768,11 @@ button {
 /* ===============================
    EVENTOS
    =============================== */
-
-.event-current-card {
-    background: #20242c;
-    color: white;
-    border-radius: 14px;
-    padding: 26px;
-    margin-bottom: 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.event-card-label {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: #aeb3bd;
-    margin-bottom: 8px;
-}
-
-.event-current-card h3 {
-    font-size: 21px;
-    margin-bottom: 7px;
-}
-
-.event-current-card p {
-    color: #b8bdc7;
-    font-size: 13px;
-}
-
-.event-current-card .secondary-button {
-    background: #343943;
-    color: white;
-}
-
-.event-current-card .secondary-button:hover {
-    background: #444a55;
-}
-
-.event-status-badge {
-    display: inline-block;
-    padding: 5px 9px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: bold;
-    background: #f0f1f4;
-    color: #555b66;
-}
-
-.status-ativo {
-    background: #e7f7ef;
-    color: #18794e;
-}
-
-.status-encerrado {
-    background: #f0f1f4;
-    color: #666b75;
-}
-
-.status-sorteado {
-    background: #fff4dc;
-    color: #8a5a00;
-}
-
-@media (max-width: 650px) {
-    .event-current-card {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
+.event-form { max-width: 700px; margin-bottom: 24px; }
+.event-current-card { margin-bottom: 24px; padding: 28px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; }
+.event-current-card h3 { margin: 8px 0; font-size: 24px; color: #111827; }
+.event-current-card p { margin: 0 0 20px; color: #6b7280; }
+.event-status-badge { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.status-ativo { background: #dcfce7; color: #166534; }
+.status-encerrado { background: #f3f4f6; color: #4b5563; }
+.status-sorteado { background: #fef3c7; color: #92400e; }

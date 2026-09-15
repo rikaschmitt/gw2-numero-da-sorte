@@ -74,7 +74,7 @@
 
                 <div class="event-status">
                     <span class="status-dot"></span>
-                    <span id="event-status-text">Evento ativo</span>
+                    <span id="event-status-text">Carregando...</span>
                 </div>
 
             </header>
@@ -167,114 +167,58 @@
 
             <!--
             -------------------
-            EVENTOS
+            DISTRIBUIR NUMEROS
             -------------------
             -->
+            <!-- EVENTOS -->
             <section id="eventos" class="page">
-
                 <div class="section-header">
                     <div>
                         <h2>Eventos</h2>
                         <p>Crie e acompanhe os eventos da guilda.</p>
                     </div>
-
-                    <button class="primary-button" id="btn-novo-evento">
-                        + Novo evento
-                    </button>
+                    <button id="btn-novo-evento" class="primary-button">+ Novo evento</button>
                 </div>
 
-                <div class="form-card" id="form-evento" style="display: none;">
-
-                    <h3>Novo evento</h3>
-
+                <div id="form-evento" class="form-card event-form" style="display: none;">
                     <div class="form-group">
-                        <label for="nome-evento-input">
-                            Nome do evento
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nome-evento-input"
-                            placeholder="Ex.: Sorteio de Janeiro"
-                            autocomplete="off"
-                        >
+                        <label for="nome-evento-input">Nome do evento</label>
+                        <input type="text" id="nome-evento-input" placeholder="Ex.: Sorteio de Janeiro" autocomplete="off">
                     </div>
-
                     <div class="form-actions">
-
-                        <button
-                            class="secondary-button"
-                            id="btn-cancelar-evento"
-                        >
-                            Cancelar
-                        </button>
-
-                        <button
-                            class="primary-button"
-                            id="btn-salvar-evento"
-                        >
-                            Criar evento
-                        </button>
-
+                        <button id="btn-cancelar-evento" class="secondary-button">Cancelar</button>
+                        <button id="btn-salvar-evento" class="primary-button">Criar evento</button>
                     </div>
-
-                    <div
-                        id="mensagem-evento"
-                        class="form-message"
-                    ></div>
-
+                    <div id="mensagem-evento" class="form-message"></div>
                 </div>
 
-                <div class="event-current-card" id="evento-atual-card">
-                    <div>
-                        <span class="event-card-label">EVENTO ATUAL</span>
-                        <h3 id="evento-atual-nome">Carregando...</h3>
-                        <p id="evento-atual-status">Carregando status...</p>
-                    </div>
-
-                    <button
-                        class="secondary-button"
-                        id="btn-encerrar-evento"
-                        style="display: none;"
-                    >
-                        Encerrar evento
-                    </button>
+                <div class="event-current-card">
+                    <span class="eyebrow">EVENTO ATUAL</span>
+                    <h3 id="evento-atual-nome">Carregando...</h3>
+                    <p id="evento-atual-status">Carregando status...</p>
+                    <button id="btn-encerrar-evento" class="secondary-button">Encerrar evento</button>
                 </div>
 
                 <div class="table-card">
                     <div class="table-header">
-                        <h3>Histórico de eventos</h3>
-                        <span>Eventos já criados neste sistema.</span>
+                        <div>
+                            <h3>Histórico de eventos</h3>
+                            <p>Eventos anteriores e o evento em andamento.</p>
+                        </div>
                     </div>
-
-                    <div class="table-wrapper">
+                    <div class="table-container">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Evento</th>
-                                    <th>Status</th>
-                                </tr>
+                                <tr><th>Evento</th><th>Status</th></tr>
                             </thead>
-
                             <tbody id="lista-eventos">
-                                <tr>
-                                    <td colspan="2" class="loading">
-                                        Carregando...
-                                    </td>
-                                </tr>
+                                <tr><td colspan="2" class="loading">Carregando...</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </section>
 
-
-            <!--
-            -------------------
-            DISTRIBUIR NUMEROS
-            -------------------
-            -->
             <section id="distribuir" class="page">
             
                 <!--<div class="section-header">
