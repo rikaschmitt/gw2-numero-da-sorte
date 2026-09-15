@@ -58,7 +58,7 @@ menuItems.forEach(item => {
 // PARTICIPANTES
 // ===============================
 
-const EVENTO_ID = null;
+let EVENTO_ID = null;
 
 const btnNovoParticipante =
     document.getElementById("btn-novo-participante");
