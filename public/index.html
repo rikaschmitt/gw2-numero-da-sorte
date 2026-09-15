@@ -160,14 +160,133 @@
             </section>
 
 
-            <!-- PÁGINAS FUTURAS -->
-
+            <!--
+            -------------------
+            DISTRIBUIR NUMEROS
+            -------------------
+            -->
             <section id="distribuir" class="page">
-                <div class="placeholder">
-                    <span>🎟️</span>
-                    <h2>Distribuir números</h2>
-                    <p>Esta tela será construída no próximo passo.</p>
+            
+                <div class="section-header">
+                    <div>
+                        <h2>Distribuir números</h2>
+                        <p>Entregue números da sorte aos participantes.</p>
+                    </div>
                 </div>
+            
+            
+                <div class="distribution-layout">
+            
+                    <!-- FORMULÁRIO -->
+            
+                    <div class="form-card distribution-card">
+            
+                        <h3>Nova distribuição</h3>
+            
+                        <div class="form-group">
+                            <label for="participante-distribuicao">
+                                Participante
+                            </label>
+            
+                            <select id="participante-distribuicao">
+                                <option value="">
+                                    Carregando participantes...
+                                </option>
+                            </select>
+                        </div>
+            
+            
+                        <div class="form-group">
+                            <label for="motivo-distribuicao">
+                                Motivo
+                            </label>
+            
+                            <select id="motivo-distribuicao">
+            
+                                <option value="Guild Mission">
+                                    Guild Mission
+                                </option>
+            
+                                <option value="Participação no Reset">
+                                    Participação no Reset
+                                </option>
+            
+                                <option value="Evento da Guilda">
+                                    Evento da Guilda
+                                </option>
+            
+                                <option value="Outro">
+                                    Outro
+                                </option>
+            
+                            </select>
+                        </div>
+            
+            
+                        <div class="form-group">
+                            <label for="quantidade-distribuicao">
+                                Quantidade
+                            </label>
+            
+                            <input
+                                type="number"
+                                id="quantidade-distribuicao"
+                                min="1"
+                                value="1"
+                            >
+                        </div>
+            
+            
+                        <button
+                            class="primary-button distribution-button"
+                            id="btn-distribuir"
+                        >
+                            🎟️ Distribuir números
+                        </button>
+            
+            
+                        <div
+                            id="mensagem-distribuicao"
+                            class="form-message"
+                        ></div>
+            
+                    </div>
+            
+            
+                    <!-- RESULTADO -->
+            
+                    <div
+                        class="distribution-result"
+                        id="resultado-distribuicao"
+                        style="display: none;"
+                    >
+            
+                        <div class="result-icon">
+                            🎉
+                        </div>
+            
+                        <h3>Números distribuídos!</h3>
+            
+                        <p>
+                            Os números abaixo foram registrados para o participante.
+                        </p>
+            
+                        <div
+                            class="numbers-list"
+                            id="numeros-gerados"
+                        ></div>
+            
+                        <button
+                            class="secondary-button"
+                            id="btn-copiar-numeros"
+                        >
+                            📋 Copiar números
+                        </button>
+            
+                    </div>
+            
+                </div>
+            
             </section>
 
             <!--
