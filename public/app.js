@@ -36,7 +36,7 @@ function abrirPagina(nome) {
     document.getElementById("page-title").textContent =
         pageTitles[nome] || "Sorteio da Guilda";
 
-    if (pageId === "todos") {
+    if (nome === "todos") {
         carregarTodosNumeros();
     }
 }
