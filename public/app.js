@@ -58,7 +58,7 @@ menuItems.forEach(item => {
 // PARTICIPANTES
 // ===============================
 
-const EVENTO_ID = "d497f2d4-7e8c-45bb-bd60-7f10d9dcb8f5";
+const EVENTO_ID = null;
 
 const btnNovoParticipante =
     document.getElementById("btn-novo-participante");
@@ -811,3 +811,29 @@ async function carregarDashboard() {
 }
 
 carregarDashboard();
+
+async function carregarEventoAtivo() {
+    try {
+        const response = await fetch("/api/evento-ativo");
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Erro ao carregar evento ativo:", data.error);
+            return false;
+        }
+
+        EVENTO_ID = data.id;
+
+        const nomeEvento = document.getElementById("nome-evento");
+
+        if (nomeEvento) {
+            nomeEvento.textContent = data.nome;
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Erro ao buscar evento ativo:", error);
+        return false;
+    }
+}
