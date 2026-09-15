@@ -413,12 +413,67 @@
             
             </section>
 
-
+            
+            <!--
+            -------------------
+            CONSULTAR
+            -------------------
+            -->
             <section id="consultar" class="page">
-                <div class="placeholder">
-                    <span>🔎</span>
-                    <h2>Consultar números</h2>
-                    <p>Esta tela será construída em seguida.</p>
+                <div class="section-header">
+                    <div>
+                        <h2>Consultar números</h2>
+                        <p>Consulte os números atribuídos a um participante.</p>
+                    </div>
+                </div>
+            
+                <div class="form-card consulta-card">
+                    <div class="form-group">
+                        <label for="codigoConsulta">Código do participante</label>
+                        <input
+                            type="text"
+                            id="codigoConsulta"
+                            placeholder="Ex.: 001"
+                            autocomplete="off"
+                        >
+                    </div>
+            
+                    <div class="form-actions">
+                        <button id="btnConsultar" class="primary-button">
+                            Consultar números
+                        </button>
+                    </div>
+            
+                    <div id="consultaMensagem" class="form-message"></div>
+                </div>
+            
+                <div id="consultaResultado" class="consulta-resultado" style="display: none;">
+                    <div class="consulta-participante">
+                        <div>
+                            <span class="consulta-label">Participante</span>
+                            <strong id="consultaNome"></strong>
+                        </div>
+            
+                        <div>
+                            <span class="consulta-label">Total de números</span>
+                            <strong id="consultaQuantidade"></strong>
+                        </div>
+                    </div>
+            
+                    <div class="table-card">
+                        <div class="table-header">
+                            <div>
+                                <h3>Números atribuídos</h3>
+                                <p>Todos os números deste participante.</p>
+                            </div>
+            
+                            <button id="btnCopiarConsulta" class="secondary-button">
+                                Copiar números
+                            </button>
+                        </div>
+            
+                        <div id="consultaNumeros" class="numbers-list"></div>
+                    </div>
                 </div>
             </section>
 
