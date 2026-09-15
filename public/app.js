@@ -778,3 +778,32 @@ async function realizarSorteio() {
         btnSortear.textContent = "🎲 Sortear número";
     }
 }
+
+async function carregarDashboard() {
+    try {
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/dashboard`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Erro ao carregar dashboard:", data.error);
+            return;
+        }
+
+        document.getElementById("totalNumeros").textContent =
+            data.total_numeros;
+
+        document.getElementById("totalParticipantes").textContent =
+            data.total_participantes;
+
+        document.getElementById("totalDistribuicoes").textContent =
+            data.total_distribuicoes;
+
+    } catch (error) {
+        console.error("Erro ao carregar dashboard:", error);
+    }
+}
+
+carregarDashboard();
