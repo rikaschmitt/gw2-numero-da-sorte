@@ -271,10 +271,6 @@ btnSalvarParticipante.addEventListener("click", async () => {
 });
 
 
-// Carregar quando a página abrir
-
-carregarParticipantes();
-
 // ===============================
 // DISTRIBUIÇÃO DE NÚMEROS
 // ===============================
@@ -554,10 +550,6 @@ btnCopiarNumeros.addEventListener("click", async () => {
 });
 
 
-// Carrega participantes
-
-carregarParticipantesDistribuicao();
-
 const btnConsultar = document.getElementById("btnConsultar");
 
 if (btnConsultar) {
@@ -810,34 +802,17 @@ async function carregarDashboard() {
     }
 }
 
-carregarEventoAtivo().then((sucesso) => {
-    if (sucesso) {
-        carregarDashboard();
+async function inicializarSistema() {
+    const sucesso = await carregarEventoAtivo();
+
+    if (!sucesso) {
+        console.error("Não foi possível inicializar o sistema sem um evento ativo.");
+        return;
     }
-});
 
-async function carregarEventoAtivo() {
-    try {
-        const response = await fetch("/api/evento-ativo");
-        const data = await response.json();
-
-        if (!response.ok) {
-            console.error("Erro ao carregar evento ativo:", data.error);
-            return false;
-        }
-
-        EVENTO_ID = data.id;
-
-        const nomeEvento = document.getElementById("nome-evento");
-
-        if (nomeEvento) {
-            nomeEvento.textContent = data.nome;
-        }
-
-        return true;
-
-    } catch (error) {
-        console.error("Erro ao buscar evento ativo:", error);
-        return false;
-    }
+    await carregarParticipantes();
+    await carregarParticipantesDistribuicao();
+    await carregarDashboard();
 }
+
+inicializarSistema();
