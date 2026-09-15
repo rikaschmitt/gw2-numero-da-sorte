@@ -763,3 +763,79 @@ button {
         letter-spacing: 4px;
     }
 }
+
+
+/* ===============================
+   EVENTOS
+   =============================== */
+
+.event-current-card {
+    background: #20242c;
+    color: white;
+    border-radius: 14px;
+    padding: 26px;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.event-card-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #aeb3bd;
+    margin-bottom: 8px;
+}
+
+.event-current-card h3 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.event-current-card p {
+    color: #b8bdc7;
+    font-size: 13px;
+}
+
+.event-current-card .secondary-button {
+    background: #343943;
+    color: white;
+}
+
+.event-current-card .secondary-button:hover {
+    background: #444a55;
+}
+
+.event-status-badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #f0f1f4;
+    color: #555b66;
+}
+
+.status-ativo {
+    background: #e7f7ef;
+    color: #18794e;
+}
+
+.status-encerrado {
+    background: #f0f1f4;
+    color: #666b75;
+}
+
+.status-sorteado {
+    background: #fff4dc;
+    color: #8a5a00;
+}
+
+@media (max-width: 650px) {
+    .event-current-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
