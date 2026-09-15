@@ -499,3 +499,108 @@ button {
     text-align: center;
     color: #777d88;
 }
+
+/* ===============================
+   DISTRIBUIÇÃO
+   =============================== */
+
+.distribution-layout {
+    display: grid;
+    grid-template-columns: minmax(350px, 1fr) minmax(300px, 0.8fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.distribution-card {
+    margin-bottom: 0;
+}
+
+.distribution-card .form-group {
+    margin-bottom: 18px;
+}
+
+.form-group select {
+    border: 1px solid #dfe1e6;
+    border-radius: 8px;
+    padding: 11px 12px;
+    font-size: 14px;
+    background: white;
+    outline: none;
+}
+
+.form-group select:focus {
+    border-color: #9298a3;
+}
+
+.distribution-button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 13px;
+}
+
+.distribution-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* RESULTADO */
+
+.distribution-result {
+    background: #20242c;
+    color: white;
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+}
+
+.result-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.distribution-result h3 {
+    font-size: 20px;
+}
+
+.distribution-result p {
+    color: #b8bdc7;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+.numbers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.number-ticket {
+    background: white;
+    color: #20242c;
+    border-radius: 9px;
+    padding: 12px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.distribution-result .secondary-button {
+    background: #343943;
+    color: white;
+}
+
+.distribution-result .secondary-button:hover {
+    background: #444a55;
+}
+
+@media (max-width: 800px) {
+
+    .distribution-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
