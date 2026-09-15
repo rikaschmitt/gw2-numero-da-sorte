@@ -3,28 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Números da Sorte</title>
-
-    <link rel="stylesheet" href="/style.css">
+    <title>Sorteio da Guilda</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="container">
+    <div class="app">
 
-        <h1>🎟️ Números da Sorte</h1>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
 
-        <p>Sistema de gerenciamento do sorteio</p>
+            <div class="logo">
+                🎟️
+                <div>
+                    <strong>Sorteio</strong>
+                    <span>da Guilda</span>
+                </div>
+            </div>
 
-        <div class="status">
-            <span></span>
-            Sistema online
-        </div>
+            <nav>
+                <button class="menu-item active" data-page="dashboard">
+                    🏠
+                    <span>Dashboard</span>
+                </button>
 
-    </main>
+                <button class="menu-item" data-page="distribuir">
+                    🎟️
+                    <span>Distribuir números</span>
+                </button>
 
-    <script src="/app.js"></script>
+                <button class="menu-item" data-page="participantes">
+                    👥
+                    <span>Participantes</span>
+                </button>
+
+                <button class="menu-item" data-page="consultar">
+                    🔎
+                    <span>Consultar números</span>
+                </button>
+
+                <button class="menu-item" data-page="numeros">
+                    📋
+                    <span>Todos os números</span>
+                </button>
+
+                <button class="menu-item" data-page="sorteio">
+                    🎲
+                    <span>Realizar sorteio</span>
+                </button>
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+        <main class="content">
+
+            <header class="topbar">
+
+                <div>
+                    <h1 id="page-title">Dashboard</h1>
+                    <p id="event-name">Sorteio de Novembro</p>
+                </div>
+
+                <div class="event-status">
+                    <span class="status-dot"></span>
+                    <span>Evento ativo</span>
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+
+                <div class="welcome">
+                    <div>
+                        <span class="eyebrow">EVENTO ATUAL</span>
+                        <h2>Sorteio de Novembro</h2>
+                        <p>
+                            Gerencie os participantes, distribua números
+                            e acompanhe o sorteio.
+                        </p>
+                    </div>
+
+                    <div class="ticket-icon">
+                        🎟️
+                    </div>
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🎟️</div>
+                        <div>
+                            <span>Números distribuídos</span>
+                            <strong id="total-numeros">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div>
+                            <span>Participantes</span>
+                            <strong id="total-participantes">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div>
+                            <span>Distribuições</span>
+                            <strong id="total-distribuicoes">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <h3>Ações rápidas</h3>
+
+                    <div class="action-grid">
+
+                        <button class="action-card" data-page="distribuir">
+                            <span>🎟️</span>
+                            <strong>Distribuir números</strong>
+                            <small>Entregar números da sorte</small>
+                        </button>
+
+                        <button class="action-card" data-page="participantes">
+                            <span>👥</span>
+                            <strong>Participantes</strong>
+                            <small>Gerenciar participantes</small>
+                        </button>
+
+                        <button class="action-card" data-page="consultar">
+                            <span>🔎</span>
+                            <strong>Consultar números</strong>
+                            <small>Ver números de um participante</small>
+                        </button>
+
+                        <button class="action-card" data-page="sorteio">
+                            <span>🎲</span>
+                            <strong>Realizar sorteio</strong>
+                            <small>Escolher o número vencedor</small>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PÁGINAS FUTURAS -->
+
+            <section id="distribuir" class="page">
+                <div class="placeholder">
+                    <span>🎟️</span>
+                    <h2>Distribuir números</h2>
+                    <p>Esta tela será construída no próximo passo.</p>
+                </div>
+            </section>
+
+
+            <section id="participantes" class="page">
+                <div class="placeholder">
+                    <span>👥</span>
+                    <h2>Participantes</h2>
+                    <p>Esta tela será construída em seguida.</p>
+                </div>
+            </section>
+
+
+            <section id="consultar" class="page">
+                <div class="placeholder">
+                    <span>🔎</span>
+                    <h2>Consultar números</h2>
+                    <p>Esta tela será construída em seguida.</p>
+                </div>
+            </section>
+
+
+            <section id="numeros" class="page">
+                <div class="placeholder">
+                    <span>📋</span>
+                    <h2>Todos os números</h2>
+                    <p>Esta tela será construída em seguida.</p>
+                </div>
+            </section>
+
+
+            <section id="sorteio" class="page">
+                <div class="placeholder">
+                    <span>🎲</span>
+                    <h2>Realizar sorteio</h2>
+                    <p>Esta tela será construída em seguida.</p>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="app.js"></script>
 
 </body>
 </html>
