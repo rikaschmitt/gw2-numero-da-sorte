@@ -90,6 +90,10 @@ app.get("/api/evento-ativo", async (req, res) => {
 // CRIAR EVENTO
 // ===============================
 
+// ===============================
+// CRIAR EVENTO
+// ===============================
+
 app.post("/api/eventos", async (req, res) => {
     const { nome } = req.body;
 
@@ -99,14 +103,12 @@ app.post("/api/eventos", async (req, res) => {
         });
     }
 
-    const { data, error } = await supabase
-        .from("eventos")
-        .insert({
-            nome: nome.trim(),
-            status: "ativo"
-        })
-        .select("id, nome, status")
-        .single();
+    const { data, error } = await supabase.rpc(
+        "criar_evento",
+        {
+            p_nome: nome.trim()
+        }
+    );
 
     if (error) {
         console.error("Erro ao criar evento:", error);
@@ -116,7 +118,13 @@ app.post("/api/eventos", async (req, res) => {
         });
     }
 
-    res.status(201).json(data);
+    if (!data || data.length === 0) {
+        return res.status(500).json({
+            error: "Não foi possível criar o evento."
+        });
+    }
+
+    res.status(201).json(data[0]);
 });
 
 // ===============================
