@@ -628,3 +628,83 @@ async function consultarNumeros() {
         btnConsultar.textContent = "Consultar números";
     }
 }
+
+const btnAtualizarNumeros = document.getElementById("btnAtualizarNumeros");
+const btnCopiarTodos = document.getElementById("btnCopiarTodos");
+
+if (btnAtualizarNumeros) {
+    btnAtualizarNumeros.addEventListener("click", carregarTodosNumeros);
+}
+
+async function carregarTodosNumeros() {
+    const lista = document.getElementById("todosNumeros");
+    const contador = document.getElementById("totalNumerosTodos");
+
+    lista.innerHTML = `
+        <span class="empty-state">
+            Carregando números...
+        </span>
+    `;
+
+    try {
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/numeros`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            lista.innerHTML = `
+                <span class="empty-state">
+                    ${data.error || "Erro ao carregar os números."}
+                </span>
+            `;
+            return;
+        }
+
+        contador.textContent = data.quantidade;
+
+        if (data.numeros.length === 0) {
+            lista.innerHTML = `
+                <span class="empty-state">
+                    Nenhum número foi distribuído ainda.
+                </span>
+            `;
+            return;
+        }
+
+        lista.innerHTML = "";
+
+        data.numeros.forEach(numero => {
+            const elemento = document.createElement("span");
+
+            elemento.className = "number-ticket";
+            elemento.textContent = numero;
+
+            lista.appendChild(elemento);
+        });
+
+        btnCopiarTodos.onclick = async () => {
+            await navigator.clipboard.writeText(
+                data.numeros.join("\n")
+            );
+
+            const textoOriginal = btnCopiarTodos.textContent;
+
+            btnCopiarTodos.textContent = "✓ Copiado!";
+
+            setTimeout(() => {
+                btnCopiarTodos.textContent = textoOriginal;
+            }, 1500);
+        };
+
+    } catch (error) {
+        console.error(error);
+
+        lista.innerHTML = `
+            <span class="empty-state">
+                Não foi possível carregar os números.
+            </span>
+        `;
+    }
+}
