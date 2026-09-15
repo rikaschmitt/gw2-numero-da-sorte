@@ -792,13 +792,13 @@ async function carregarDashboard() {
             return;
         }
 
-        document.getElementById("totalNumeros").textContent =
+        document.getElementById("total-numeros").textContent =
             data.total_numeros;
 
-        document.getElementById("totalParticipantes").textContent =
+        document.getElementById("total-participantes").textContent =
             data.total_participantes;
 
-        document.getElementById("totalDistribuicoes").textContent =
+        document.getElementById("total-distribuicoes").textContent =
             data.total_distribuicoes;
 
     } catch (error) {
