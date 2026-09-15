@@ -478,11 +478,43 @@
             </section>
 
 
-            <section id="numeros" class="page">
-                <div class="placeholder">
-                    <span>📋</span>
-                    <h2>Todos os números</h2>
-                    <p>Esta tela será construída em seguida.</p>
+            <!--
+            -------------------
+            TODOS OS NUMEROS
+            -------------------
+            -->
+            <section id="todos" class="page">
+                <div class="section-header">
+                    <div>
+                        <h2>Todos os números</h2>
+                        <p>Visualize todos os números distribuídos neste evento.</p>
+                    </div>
+            
+                    <button id="btnAtualizarNumeros" class="secondary-button">
+                        ↻ Atualizar
+                    </button>
+                </div>
+            
+                <div class="table-card">
+                    <div class="table-header">
+                        <div>
+                            <h3>Números distribuídos</h3>
+                            <p>
+                                <span id="totalNumerosTodos">0</span>
+                                números disponíveis para o sorteio.
+                            </p>
+                        </div>
+            
+                        <button id="btnCopiarTodos" class="secondary-button">
+                            Copiar todos
+                        </button>
+                    </div>
+            
+                    <div id="todosNumeros" class="numbers-list">
+                        <span class="empty-state">
+                            Carregando números...
+                        </span>
+                    </div>
                 </div>
             </section>
 
