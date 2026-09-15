@@ -34,7 +34,7 @@ function abrirPagina(nome) {
     });
 
     document.getElementById("page-title").textContent =
-        pageTitles[nome] || "Sorteio da Guilda";
+        pageTitles[nome] || "Sociedade do Dragão [BR] | Números da Sorte";
 
     if (nome === "todos") {
         carregarTodosNumeros();
