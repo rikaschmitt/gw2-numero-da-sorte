@@ -712,3 +712,69 @@ async function carregarTodosNumeros() {
         `;
     }
 }
+
+const btnSortear = document.getElementById("btnSortear");
+
+if (btnSortear) {
+    btnSortear.addEventListener("click", realizarSorteio);
+}
+
+async function realizarSorteio() {
+    const mensagem = document.getElementById("sorteioMensagem");
+    const resultado = document.getElementById("resultadoSorteio");
+
+    mensagem.textContent = "";
+    resultado.style.display = "none";
+
+    const confirmar = confirm(
+        "Tem certeza que deseja realizar o sorteio?\n\n" +
+        "O sorteio é oficial e só poderá ser realizado uma vez."
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    btnSortear.disabled = true;
+    btnSortear.textContent = "🎲 Sorteando...";
+
+    try {
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/sortear`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            mensagem.textContent =
+                data.error || "Não foi possível realizar o sorteio.";
+            return;
+        }
+
+        document.getElementById("numeroSorteado").textContent =
+            data.numero;
+
+        document.getElementById("nomeVencedor").textContent =
+            data.participante_nome;
+
+        resultado.style.display = "block";
+
+        btnSortear.textContent = "✓ Sorteio realizado";
+        btnSortear.disabled = true;
+
+    } catch (error) {
+        console.error("Erro ao realizar sorteio:", error);
+
+        mensagem.textContent =
+            "Não foi possível conectar ao servidor.";
+            
+        btnSortear.disabled = false;
+        btnSortear.textContent = "🎲 Sortear número";
+    }
+}
