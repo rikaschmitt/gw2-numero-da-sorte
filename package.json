@@ -1,13 +1,13 @@
 {
   "name": "sorteio-guilda",
   "version": "1.0.0",
-  "description": "Sistema de gerenciamento de números da sorte",
+  "description": "Sistema de sorteio da guilda",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "@supabase/supabase-js": "^2.57.0"
+    "@supabase/supabase-js": "^2.57.0",
+    "express": "^5.1.0"
   }
 }
