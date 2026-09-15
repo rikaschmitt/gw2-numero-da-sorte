@@ -6,7 +6,7 @@ const pageTitles = {
     distribuir: "Distribuir números",
     participantes: "Participantes",
     consultar: "Consultar números",
-    numeros: "Todos os números",
+    todos: "Todos os números",
     sorteio: "Realizar sorteio"
 };
 
@@ -34,7 +34,7 @@ function abrirPagina(nome) {
     });
 
     document.getElementById("page-title").textContent =
-        pageTitles[nome] || "Sociedade do Dragão [BR] | Números da Sorte";
+        pageTitles[nome] || "Título genérico";
 
     if (nome === "todos") {
         carregarTodosNumeros();
