@@ -549,3 +549,82 @@ btnCopiarNumeros.addEventListener("click", async () => {
 // Carrega participantes
 
 carregarParticipantesDistribuicao();
+
+const btnConsultar = document.getElementById("btnConsultar");
+
+if (btnConsultar) {
+    btnConsultar.addEventListener("click", consultarNumeros);
+}
+
+async function consultarNumeros() {
+    const codigoInput = document.getElementById("codigoConsulta");
+    const mensagem = document.getElementById("consultaMensagem");
+    const resultado = document.getElementById("consultaResultado");
+
+    const codigo = codigoInput.value.trim();
+
+    mensagem.textContent = "";
+    resultado.style.display = "none";
+
+    if (!codigo) {
+        mensagem.textContent = "Informe o código do participante.";
+        return;
+    }
+
+    btnConsultar.disabled = true;
+    btnConsultar.textContent = "Consultando...";
+
+    try {
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/consultar/${encodeURIComponent(codigo)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            mensagem.textContent = data.error || "Participante não encontrado.";
+            return;
+        }
+
+        document.getElementById("consultaNome").textContent =
+            data.participante.nome;
+
+        document.getElementById("consultaQuantidade").textContent =
+            data.quantidade;
+
+        const lista = document.getElementById("consultaNumeros");
+
+        lista.innerHTML = "";
+
+        data.numeros.forEach(numero => {
+            const elemento = document.createElement("span");
+
+            elemento.className = "number-ticket";
+            elemento.textContent = numero;
+
+            lista.appendChild(elemento);
+        });
+
+        resultado.style.display = "block";
+
+        document.getElementById("btnCopiarConsulta").onclick = async () => {
+            await navigator.clipboard.writeText(data.numeros.join("\n"));
+
+            const botao = document.getElementById("btnCopiarConsulta");
+            const textoOriginal = botao.textContent;
+
+            botao.textContent = "✓ Copiado!";
+
+            setTimeout(() => {
+                botao.textContent = textoOriginal;
+            }, 1500);
+        };
+
+    } catch (error) {
+        console.error(error);
+        mensagem.textContent = "Erro ao consultar os números.";
+    } finally {
+        btnConsultar.disabled = false;
+        btnConsultar.textContent = "Consultar números";
+    }
+}
