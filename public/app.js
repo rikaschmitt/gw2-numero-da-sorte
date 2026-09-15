@@ -435,6 +435,7 @@ btnSalvarParticipante.addEventListener("click", async () => {
         // Atualiza lista
 
         await carregarParticipantes();
+        await carregarParticipantesDistribuicao();
 
 
     } catch (error) {
