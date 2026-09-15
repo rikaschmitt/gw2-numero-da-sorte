@@ -39,6 +39,10 @@ function abrirPagina(nome) {
     if (nome === "todos") {
         carregarTodosNumeros();
     }
+
+    if (nome === "dashboard") {
+        carregarDashboard();
+    }
 }
 
 
