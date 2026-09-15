@@ -266,3 +266,286 @@ btnSalvarParticipante.addEventListener("click", async () => {
 // Carregar quando a página abrir
 
 carregarParticipantes();
+
+// ===============================
+// DISTRIBUIÇÃO DE NÚMEROS
+// ===============================
+
+const participanteDistribuicao =
+    document.getElementById("participante-distribuicao");
+
+const motivoDistribuicao =
+    document.getElementById("motivo-distribuicao");
+
+const quantidadeDistribuicao =
+    document.getElementById("quantidade-distribuicao");
+
+const btnDistribuir =
+    document.getElementById("btn-distribuir");
+
+const mensagemDistribuicao =
+    document.getElementById("mensagem-distribuicao");
+
+const resultadoDistribuicao =
+    document.getElementById("resultado-distribuicao");
+
+const numerosGerados =
+    document.getElementById("numeros-gerados");
+
+const btnCopiarNumeros =
+    document.getElementById("btn-copiar-numeros");
+
+let numerosParaCopiar = [];
+
+
+// ===============================
+// CARREGAR PARTICIPANTES
+// ===============================
+
+async function carregarParticipantesDistribuicao() {
+
+    participanteDistribuicao.innerHTML = `
+        <option value="">
+            Carregando participantes...
+        </option>
+    `;
+
+    try {
+
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/participantes`
+        );
+
+        const participantes = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                participantes.error ||
+                "Erro ao carregar participantes."
+            );
+        }
+
+
+        if (participantes.length === 0) {
+
+            participanteDistribuicao.innerHTML = `
+                <option value="">
+                    Nenhum participante cadastrado
+                </option>
+            `;
+
+            return;
+        }
+
+
+        participanteDistribuicao.innerHTML = `
+            <option value="">
+                Selecione um participante
+            </option>
+        `;
+
+
+        participantes.forEach(participante => {
+
+            const option = document.createElement("option");
+
+            option.value = participante.id;
+
+            option.textContent =
+                `${participante.codigo} — ${participante.nome}`;
+
+            participanteDistribuicao.appendChild(option);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        participanteDistribuicao.innerHTML = `
+            <option value="">
+                Erro ao carregar participantes
+            </option>
+        `;
+
+    }
+
+}
+
+
+// ===============================
+// DISTRIBUIR
+// ===============================
+
+btnDistribuir.addEventListener("click", async () => {
+
+    const participanteId =
+        participanteDistribuicao.value;
+
+    const motivo =
+        motivoDistribuicao.value;
+
+    const quantidade =
+        Number(quantidadeDistribuicao.value);
+
+
+    mensagemDistribuicao.textContent = "";
+
+
+    if (!participanteId) {
+
+        mensagemDistribuicao.textContent =
+            "Selecione um participante.";
+
+        return;
+    }
+
+
+    if (!quantidade || quantidade < 1) {
+
+        mensagemDistribuicao.textContent =
+            "Informe uma quantidade válida.";
+
+        return;
+    }
+
+
+    btnDistribuir.disabled = true;
+
+    btnDistribuir.textContent =
+        "Gerando números...";
+
+
+    resultadoDistribuicao.style.display = "none";
+
+
+    try {
+
+        const response = await fetch(
+            `/api/eventos/${EVENTO_ID}/distribuir`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    participante_id:
+                        participanteId,
+
+                    motivo:
+                        motivo,
+
+                    quantidade:
+                        quantidade,
+
+                    administrador:
+                        "Administrador"
+
+                })
+            }
+        );
+
+
+        const resultado =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                resultado.error ||
+                "Erro ao distribuir números."
+            );
+
+        }
+
+
+        // Guarda os números
+        numerosParaCopiar =
+            resultado.numeros;
+
+
+        // Mostra os números
+
+        numerosGerados.innerHTML =
+            resultado.numeros
+                .map(numero => `
+                    <div class="number-ticket">
+                        ${numero}
+                    </div>
+                `)
+                .join("");
+
+
+        resultadoDistribuicao.style.display =
+            "block";
+
+
+        mensagemDistribuicao.textContent =
+            `${resultado.quantidade} número(s) distribuído(s) com sucesso.`;
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        mensagemDistribuicao.textContent =
+            error.message;
+
+    }
+
+
+    btnDistribuir.disabled = false;
+
+    btnDistribuir.textContent =
+        "🎟️ Distribuir números";
+
+});
+
+
+// ===============================
+// COPIAR NÚMEROS
+// ===============================
+
+btnCopiarNumeros.addEventListener("click", async () => {
+
+    if (!numerosParaCopiar.length) {
+        return;
+    }
+
+
+    const texto =
+        numerosParaCopiar.join(", ");
+
+
+    try {
+
+        await navigator.clipboard.writeText(texto);
+
+        btnCopiarNumeros.textContent =
+            "✓ Números copiados!";
+
+        setTimeout(() => {
+
+            btnCopiarNumeros.textContent =
+                "📋 Copiar números";
+
+        }, 2000);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+
+// Carrega participantes
+
+carregarParticipantesDistribuicao();
