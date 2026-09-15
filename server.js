@@ -68,6 +68,24 @@ app.get("/api/eventos/:eventoId/dashboard", async (req, res) => {
     res.json(data[0]);
 });
 
+app.get("/api/evento-ativo", async (req, res) => {
+    const { data, error } = await supabase
+        .from("eventos")
+        .select("id, nome, status")
+        .eq("status", "ativo")
+        .single();
+
+    if (error) {
+        console.error("Erro ao buscar evento ativo:", error);
+
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+
+    res.json(data);
+});
+
 // ===============================
 // CRIAR EVENTO
 // ===============================
