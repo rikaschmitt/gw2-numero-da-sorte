@@ -73,19 +73,13 @@ app.get("/api/evento-ativo", async (req, res) => {
         .from("eventos")
         .select("id, nome, status")
         .eq("status", "ativo")
-        .maybeSingle();
+        .single();
 
     if (error) {
         console.error("Erro ao buscar evento ativo:", error);
 
         return res.status(500).json({
             error: error.message
-        });
-    }
-
-    if (!data) {
-        return res.status(404).json({
-            error: "Nenhum evento ativo no momento."
         });
     }
 
@@ -117,12 +111,6 @@ app.post("/api/eventos", async (req, res) => {
     if (error) {
         console.error("Erro ao criar evento:", error);
 
-        if (error.code === "23505") {
-            return res.status(409).json({
-                error: "Já existe um evento ativo. Encerre o evento atual antes de criar um novo."
-            });
-        }
-
         return res.status(500).json({
             error: error.message
         });
@@ -130,6 +118,10 @@ app.post("/api/eventos", async (req, res) => {
 
     res.status(201).json(data);
 });
+
+// ===============================
+// ENCERRAR EVENTO
+// ===============================
 
 app.post("/api/eventos/:eventoId/encerrar", async (req, res) => {
     const { eventoId } = req.params;
@@ -144,15 +136,8 @@ app.post("/api/eventos/:eventoId/encerrar", async (req, res) => {
 
     if (error) {
         console.error("Erro ao encerrar evento:", error);
-
-        if (error.code === "PGRST116") {
-            return res.status(404).json({
-                error: "Evento ativo não encontrado."
-            });
-        }
-
-        return res.status(500).json({
-            error: error.message
+        return res.status(400).json({
+            error: "Não foi possível encerrar o evento. Verifique se ele está ativo."
         });
     }
 
