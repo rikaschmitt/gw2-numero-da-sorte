@@ -48,6 +48,10 @@ function abrirPagina(nome) {
     if (nome === "eventos") {
         carregarEventos();
     }
+
+    if (nome === "distribuir" && EVENTO_ID) {
+        carregarParticipantesDistribuicao();
+    }
 }
 
 
