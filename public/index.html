@@ -518,14 +518,53 @@
                 </div>
             </section>
 
-
+            <!--
+            -------------------
+            SORTEIO
+            -------------------
+            -->
             <section id="sorteio" class="page">
-                <div class="placeholder">
-                    <span>🎲</span>
+            <div class="section-header">
+                <div>
                     <h2>Realizar sorteio</h2>
-                    <p>Esta tela será construída em seguida.</p>
+                    <p>Realize o sorteio oficial do evento.</p>
                 </div>
-            </section>
+            </div>
+        
+            <div class="draw-card">
+                <div class="draw-icon">🎲</div>
+        
+                <h3>Pronto para sortear?</h3>
+        
+                <p>
+                    O sistema irá selecionar aleatoriamente um dos números
+                    que já foram distribuídos neste evento.
+                </p>
+        
+                <button id="btnSortear" class="draw-button">
+                    🎲 Sortear número
+                </button>
+        
+                <div id="sorteioMensagem" class="form-message"></div>
+            </div>
+        
+            <div id="resultadoSorteio" class="draw-result" style="display: none;">
+                <span class="draw-result-label">NÚMERO SORTEADO</span>
+        
+                <div id="numeroSorteado" class="draw-number">
+                    0000
+                </div>
+        
+                <div class="draw-winner">
+                    🏆 Vencedor
+                    <strong id="nomeVencedor"></strong>
+                </div>
+        
+                <p class="draw-warning">
+                    Este sorteio foi registrado oficialmente.
+                </p>
+            </div>
+        </section>
 
         </main>
 
