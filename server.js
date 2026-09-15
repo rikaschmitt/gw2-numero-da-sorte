@@ -41,6 +41,33 @@ app.get("/api/eventos", async (req, res) => {
     res.json(data);
 });
 
+app.get("/api/eventos/:eventoId/dashboard", async (req, res) => {
+    const { eventoId } = req.params;
+
+    const { data, error } = await supabase.rpc(
+        "dashboard_evento",
+        {
+            p_evento_id: eventoId
+        }
+    );
+
+    if (error) {
+        console.error("Erro ao carregar dashboard:", error);
+
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+
+    if (!data || data.length === 0) {
+        return res.status(404).json({
+            error: "Não foi possível carregar os dados do dashboard."
+        });
+    }
+
+    res.json(data[0]);
+});
+
 // ===============================
 // CRIAR EVENTO
 // ===============================
