@@ -170,13 +170,128 @@
                 </div>
             </section>
 
-
+            <!--
+            -------------------
+            PARTICIIPANTES
+            -------------------
+            -->
             <section id="participantes" class="page">
-                <div class="placeholder">
-                    <span>👥</span>
-                    <h2>Participantes</h2>
-                    <p>Esta tela será construída em seguida.</p>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Participantes</h2>
+                        <p>Gerencie os participantes do evento.</p>
+                    </div>
+            
+                    <button class="primary-button" id="btn-novo-participante">
+                        + Novo participante
+                    </button>
                 </div>
+            
+            
+                <!-- FORMULÁRIO -->
+            
+                <div class="form-card" id="form-participante" style="display: none;">
+            
+                    <h3>Novo participante</h3>
+            
+                    <div class="form-grid">
+            
+                        <div class="form-group">
+                            <label for="codigo-participante">
+                                Código
+                            </label>
+            
+                            <input
+                                type="text"
+                                id="codigo-participante"
+                                placeholder="Ex.: 001"
+                            >
+                        </div>
+            
+            
+                        <div class="form-group">
+                            <label for="nome-participante">
+                                Nome
+                            </label>
+            
+                            <input
+                                type="text"
+                                id="nome-participante"
+                                placeholder="Ex.: Rick"
+                            >
+                        </div>
+            
+                    </div>
+            
+            
+                    <div class="form-actions">
+            
+                        <button
+                            class="secondary-button"
+                            id="btn-cancelar-participante"
+                        >
+                            Cancelar
+                        </button>
+            
+                        <button
+                            class="primary-button"
+                            id="btn-salvar-participante"
+                        >
+                            Salvar participante
+                        </button>
+            
+                    </div>
+            
+                    <div
+                        id="mensagem-participante"
+                        class="form-message"
+                    ></div>
+            
+                </div>
+            
+            
+                <!-- LISTA -->
+            
+                <div class="table-card">
+            
+                    <div class="table-header">
+                        <div>
+                            <h3>Participantes cadastrados</h3>
+                            <span id="contador-participantes">
+                                0 participantes
+                            </span>
+                        </div>
+                    </div>
+            
+            
+                    <div class="table-wrapper">
+            
+                        <table>
+            
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+            
+                            <tbody id="lista-participantes">
+            
+                                <tr>
+                                    <td colspan="2" class="loading">
+                                        Carregando...
+                                    </td>
+                                </tr>
+            
+                            </tbody>
+            
+                        </table>
+            
+                    </div>
+            
+                </div>
+            
             </section>
 
 
