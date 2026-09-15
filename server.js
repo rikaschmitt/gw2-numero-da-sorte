@@ -146,6 +146,64 @@ app.post("/api/eventos/:eventoId/participantes", async (req, res) => {
 });
 
 // ===============================
+// DISTRIBUIR NÚMEROS
+// ===============================
+
+app.post("/api/eventos/:eventoId/distribuir", async (req, res) => {
+    const { eventoId } = req.params;
+
+    const {
+        participante_id,
+        motivo,
+        quantidade,
+        administrador
+    } = req.body;
+
+    if (!participante_id) {
+        return res.status(400).json({
+            error: "O participante é obrigatório."
+        });
+    }
+
+    if (!motivo || !motivo.trim()) {
+        return res.status(400).json({
+            error: "O motivo é obrigatório."
+        });
+    }
+
+    if (!quantidade || quantidade <= 0) {
+        return res.status(400).json({
+            error: "A quantidade deve ser maior que zero."
+        });
+    }
+
+    const { data, error } = await supabase.rpc(
+        "distribuir_numeros",
+        {
+            p_evento_id: eventoId,
+            p_participante_id: participante_id,
+            p_motivo: motivo.trim(),
+            p_quantidade: quantidade,
+            p_administrador: administrador || null
+        }
+    );
+
+    if (error) {
+        console.error("Erro ao distribuir números:", error);
+
+        return res.status(400).json({
+            error: error.message
+        });
+    }
+
+    res.status(201).json({
+        sucesso: true,
+        quantidade: data.length,
+        numeros: data.map(item => item.numero)
+    });
+});
+
+// ===============================
 // INICIAR SERVIDOR
 // ===============================
 
