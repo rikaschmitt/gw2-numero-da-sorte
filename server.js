@@ -203,6 +203,41 @@ app.post("/api/eventos/:eventoId/distribuir", async (req, res) => {
     });
 });
 
+
+app.get("/api/eventos/:eventoId/consultar/:codigo", async (req, res) => {
+  const { eventoId, codigo } = req.params;
+
+  const { data, error } = await supabase.rpc(
+    "consultar_numeros_participante",
+    {
+      p_evento_id: eventoId,
+      p_codigo: codigo.trim()
+    }
+  );
+
+  if (error) {
+    console.error("Erro ao consultar números:", error);
+    return res.status(500).json({
+      error: error.message
+    });
+  }
+
+  if (!data || data.length === 0) {
+    return res.status(404).json({
+      error: "Nenhum participante ou número encontrado para este código."
+    });
+  }
+
+  res.json({
+    participante: {
+      id: data[0].participante_id,
+      nome: data[0].participante_nome
+    },
+    quantidade: data.length,
+    numeros: data.map(item => item.numero)
+  });
+});
+
 // ===============================
 // INICIAR SERVIDOR
 // ===============================
