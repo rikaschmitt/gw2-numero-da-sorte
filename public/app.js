@@ -810,7 +810,11 @@ async function carregarDashboard() {
     }
 }
 
-carregarDashboard();
+carregarEventoAtivo().then((sucesso) => {
+    if (sucesso) {
+        carregarDashboard();
+    }
+});
 
 async function carregarEventoAtivo() {
     try {
