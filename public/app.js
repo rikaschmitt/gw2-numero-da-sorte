@@ -802,6 +802,32 @@ async function carregarDashboard() {
     }
 }
 
+async function carregarEventoAtivo() {
+    try {
+        const response = await fetch("/api/evento-ativo");
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Erro ao carregar evento ativo:", data.error);
+            return false;
+        }
+
+        EVENTO_ID = data.id;
+
+        const nomeEvento = document.getElementById("nome-evento");
+
+        if (nomeEvento) {
+            nomeEvento.textContent = data.nome;
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Erro ao buscar evento ativo:", error);
+        return false;
+    }
+}
+
 async function inicializarSistema() {
     const sucesso = await carregarEventoAtivo();
 
